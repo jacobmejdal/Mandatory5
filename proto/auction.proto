@@ -5,11 +5,18 @@ option go_package ="github.com/jacobmejdal/Mandatory5/proto";
 service Auction {
    rpc Bid (BidRequest) returns (BidReply);
    rpc Result (ResultRequest) returns (ResultReply);
+   rpc Heartbeat (Empty) returns (Empty);
+   rpc Update (BidRequest) returns (Empty);
+}
+
+message Empty{
+
 }
 
 message BidRequest {
 int32 bidder = 1;
 int32 amount = 2;
+int64 id = 3;
 }
 
 message BidReply {
@@ -30,3 +37,4 @@ message ResultReply {
     int32 amount = 2;
     bool auction_over = 3;
 }
+
