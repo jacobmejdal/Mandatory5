@@ -1,0 +1,32 @@
+syntax = "proto3";
+package auction;
+option go_package ="github.com/jacobmejdal/Mandatory5/proto";
+
+service Auction {
+   rpc Bid (BidRequest) returns (BidReply);
+   rpc Result (ResultRequest) returns (ResultReply);
+}
+
+message BidRequest {
+int32 bidder = 1;
+int32 amount = 2;
+}
+
+message BidReply {
+    enum ACK {
+        FAIL = 0;
+        SUCCESS = 1;
+        EXCEPTION = 2;
+    }
+    ACK outcome = 1;
+}
+
+message ResultRequest {
+   
+}
+
+message ResultReply {
+    int32 highest_bidder = 1;
+    int32 amount = 2;
+    bool auction_over = 3;
+}
