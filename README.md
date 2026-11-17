@@ -8,3 +8,7 @@ go run ./server 0
 
 Terminal 2:
 go run ./server 1
+
+Terminal 3:
+go run ./client <bidder> <amount>
+
