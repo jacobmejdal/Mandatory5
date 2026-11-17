@@ -1,2 +1,10 @@
 # Mandatory5
-You must implement a **distributed auction system** using replication: a distributed component which handles auctions, and provides operations for bidding and querying the state of an auction.
+run server in terminal:
+
+Start node 0 (primary) first, then node 1 (backup).
+
+Terminal 1:
+go run ./server 0
+
+Terminal 2:
+go run ./server 1
