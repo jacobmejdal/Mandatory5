@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"time"
+	"os"
+    "strconv"
 
 	pb "github.com/jacobmejdal/Mandatory5/proto"
 
@@ -27,12 +29,32 @@ func main() {
 
 	client := pb.NewAuctionClient(conn)
 
+	if len(os.Args) < 3 {
+    log.Fatal("usage: go run client.go <bidder> <amount>")
+	}
+
+	bidder, err := strconv.Atoi(os.Args[1])
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	amount, err := strconv.Atoi(os.Args[2])
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf(
+    "Submitting bid: bidder=%d amount=%d\n",
+    bidder,
+    amount,
+	)
+
 	// Place bid
 	bidReply, err := client.Bid(
 		context.Background(),
 		&pb.BidRequest{
-			Bidder: 1,
-			Amount: 100,
+			Bidder: int32(bidder),
+			Amount: int32(amount),
 			Id:     time.Now().UnixNano(),
 		},
 	)

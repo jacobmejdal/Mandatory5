@@ -45,6 +45,20 @@ func main() {
 	if !s.isPrimary {
 		go s.watchPrimary()
 	}
+
+	go func() {
+		time.Sleep(time.Until(s.auctionEndTime))
+
+		s.mu.Lock()
+		defer s.mu.Unlock()
+
+		log.Printf(
+			"AUCTION ENDED - Winner: Bidder %d with bid %d",
+			s.highestBidder,
+			s.highestBid,
+		)
+	}()
+
 	grpcServer.Serve(lis)
 }
 
